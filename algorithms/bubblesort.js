@@ -19,23 +19,37 @@ function setup() {
 function draw() {
   background(0);
 
+  
   if (i < values.length) {
-    for (let j = 0; j < values.length - i - 1; j++) {
+    if (j < values.length - i - 1) {
       let a = values[j];
       let b = values[j + 1];
       if (a > b) {
         swap(values, j, j + 1);
       }
+      j++;
+    } else {
+      j = 0; 
+      i++;
     }
   } else {
     console.log("finished");
     noLoop();
   }
-  i++;
 
-  for (let i = 0; i < values.length; i++) {
+  for(let k=0;k<values.length;k++){
+     if(k>=values.length-i){
+        fill(0,255,0);
+    }
+    else if(k==j){
+        fill(255,0,0);
+    }
+    else{
+        fill(0);                                                                                                        
+    }
+
     stroke(255);
-    rect(i*blockWidth+1, 0, blockWidth, height - values[i]);
+    rect(k*blockWidth+1,0,blockWidth,height-values[k]);
   }
 }
 
