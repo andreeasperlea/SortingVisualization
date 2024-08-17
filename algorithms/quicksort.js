@@ -2,10 +2,10 @@ let values = [];
 let w = 10;
 
 let states = [];
-
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  let c = createCanvas(500, 200);
   values = new Array(floor(width / w));
+  c.parent("myp5container2");
   for (let i = 0; i < values.length; i++) {
     values[i] = random(height);
     states[i] = -1;
@@ -15,10 +15,13 @@ function setup() {
 
 async function quickSort(arr, start, end) {
   if (start >= end) {
-    return;
+    for (let i = start; i <= end; i++) {
+        states[i] = 2;
+      }
+      return;
   }
   let index = await partition(arr, start, end);
-  states[index] = -1;
+  states[index] = 2;
 
   await Promise.all([
     quickSort(arr, start, index - 1),
@@ -59,18 +62,22 @@ function draw() {
   for (let i = 0; i < values.length; i++) {
     noStroke();
     if (states[i] == 0) {
-      fill('#E0777D');
+      fill(255,0,0);
     } else if (states[i] == 1) {
-      fill('#D6FFB7');
-    } else {
-      fill(255);
+      fill(0,255,0);
     }
+      else if (states[i] == 2) {
+        fill(0, 255, 0);
+    } else {
+      fill(0);
+    }
+    stroke(255);
     rect(i * w, height - values[i], w, values[i]);
   }
 }
 
 async function swap(arr, a, b) {
-  await sleep(25);
+  await sleep(50);
   let temp = arr[a];
   arr[a] = arr[b];
   arr[b] = temp;
