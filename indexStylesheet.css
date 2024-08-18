@@ -42,4 +42,9 @@ li a:hover {
 
 .word{
     color:green;
+    font-size: 24px;
 }
+.active {
+    background-color: #555;
+    color: white;
+  }
